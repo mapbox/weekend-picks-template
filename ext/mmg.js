@@ -1,169 +1,190 @@
-// Array.indexOf polyfill courtesy of Mozilla MDN:
-// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf
-if (!Array.prototype.indexOf) {
-    Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
-        "use strict";
-        if (this === void 0 || this === null) {
-            throw new TypeError();
-        }
-        var t = Object(this);
-        var len = t.length >>> 0;
-        if (len === 0) {
-            return -1;
-        }
-        var n = 0;
-        if (arguments.length > 0) {
-            n = Number(arguments[1]);
-            if (n !== n) { // shortcut for verifying if it's NaN
-                n = 0;
-            } else if (n !== 0 && n !== Infinity && n !== -Infinity) {
-                n = (n > 0 || -1) * Math.floor(Math.abs(n));
-            }
-        }
-        if (n >= len) {
-            return -1;
-        }
-        var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
-        for (; k < len; k++) {
-            if (k in t && t[k] === searchElement) {
-                return k;
-            }
-        }
-        return -1;
-    };
-}
-
 function mmg() {
-    var l = {},
-        // a list of our markers
+
+    var m = {},
+        // external list of geojson features
+        features = [],
+        // internal list of markers
         markers = [],
         // the absolute position of the parent element
         position = null,
+        // a factory function for creating DOM elements out of
+        // GeoJSON objects
         factory = null,
+        // a sorter function for sorting GeoJSON objects
+        // in the DOM
+        sorter = null,
+        // a list of urls from which features can be loaded.
+        // these can be templated with {z}, {x}, and {y}
+        urls,
         // map bounds
         left = null,
         right = null;
 
-    var parent = document.createElement('div');
-    parent.style.cssText = 'position: absolute; top: 0px;' +
-      'left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 1';
-
-    function defaultFactory(feature) {
-        var d = document.createElement('div');
-        d.className = 'mmg-default';
-        return d;
-    }
-
-    function fLocation (feature) {
-        // GeoJSON
-        var geom = feature.geometry;
-        // coerce the lat and lon values, just in case
-        var lon = Number(geom.coordinates[0]),
-            lat = Number(geom.coordinates[1]);
-        return new MM.Location(lat, lon);
-    }
-
-    // Reposition al markers
-    function repositionAllMarkers() {
-        left = l.map.pointLocation(new MM.Point(0, 0));
-        right = l.map.pointLocation(new MM.Point(l.map.dimensions.x, 0));
-        for (var i = 0; i < markers.length; i++) {
-            repositionMarker(markers[i]);
-        }
-    }
-
     // reposition a single marker element
-    function repositionMarker(marker) {
+    function reposition(marker) {
         // remember the tile coordinate so we don't have to reproject every time
-        if (!marker.coord) marker.coord = l.map.locationCoordinate(marker.location);
-        var pos = l.map.coordinatePoint(marker.coord);
+        if (!marker.coord) marker.coord = m.map.locationCoordinate(marker.location);
+        var pos = m.map.coordinatePoint(marker.coord);
         var pos_loc;
+
+        // If this point has wound around the world, adjust its position
+        // to the new, onscreen location
         if (pos.x < 0) {
             pos_loc = new MM.Location(marker.location.lat, marker.location.lon);
             pos_loc.lon += Math.ceil((left.lon - marker.location.lon) / 360) * 360;
-            pos = l.map.locationPoint(pos_loc);
-        } else if (pos.x > l.map.dimensions.x) {
+            pos = m.map.locationPoint(pos_loc);
+            marker.coord = m.map.locationCoordinate(pos_loc);
+        } else if (pos.x > m.map.dimensions.x) {
             pos_loc = new MM.Location(marker.location.lat, marker.location.lon);
             pos_loc.lon -= Math.ceil((marker.location.lon - right.lon) / 360) * 360;
-            pos = l.map.locationPoint(pos_loc);
+            pos = m.map.locationPoint(pos_loc);
+            marker.coord = m.map.locationCoordinate(pos_loc);
         }
-        if (pos_loc) {
-            marker.coord = l.map.locationCoordinate(pos_loc);
-        }
+
         pos.scale = 1;
         pos.width = pos.height = 0;
-        MM.moveElement(marker, pos);
+        MM.moveElement(marker.element, pos);
     }
 
-    /**
-     * Add an HTML element as a marker, located at the position of the
-     * provided GeoJSON feature, Location instance (or {lat,lon} object
-     * literal), or "lat,lon" string.
-     */
-    var first = true;
-    l.addMarker = function(marker, feature) {
-        if (!marker || !feature) {
-            return null;
+    m.draw = function() {
+        if (!m.map) return;
+        left = m.map.pointLocation(new MM.Point(0, 0));
+        right = m.map.pointLocation(new MM.Point(m.map.dimensions.x, 0));
+        for (var i = 0; i < markers.length; i++) {
+            reposition(markers[i]);
         }
-        // convert the feature to a Location instance
-        marker.location = fLocation(feature);
-        // position: absolute
-        marker.style.position = 'absolute';
-        // update the marker's position
-        if (l.map) repositionMarker(marker);
-        // append it to the DOM
-        parent.appendChild(marker);
+    };
 
-        // add it to the list
+    m.add = function(marker) {
+        if (!marker || !marker.element) return null;
+        parent.appendChild(marker.element);
         markers.push(marker);
-
         return marker;
     };
 
-    l.geojson = function(x) {
-        if (!x) return markers;
-
-        for (var i = 0; i < x.features.length; i++) {
-            l.addMarker(factory(x.features[i]), x.features[i]);
-        }
-        return this;
-    };
-
-    l.draw = function() {
-        repositionAllMarkers();
-    };
-
-    /**
-     * Remove the element marker from the layer and the DOM.
-     */
-    l.removeMarker = function(marker) {
-        var index = markers.indexOf(marker);
-        if (index > -1) {
-            markers.splice(index, 1);
-        }
-        if (marker.parentNode == parent) {
-            parent.removeChild(marker);
+    m.remove = function(marker) {
+        if (!marker) return null;
+        parent.removeChild(marker.element);
+        for (var i = 0; i < markers.length; i++) {
+            if (markers[i] === marker) {
+                markers.splice(i, 1);
+                return marker;
+            }
         }
         return marker;
     };
 
-    // remove all markers
-    l.removeAllMarkers = function() {
-        while (markers.length > 0) {
-            this.removeMarker(markers[0]);
+    m.markers = function(x) {
+        if (!arguments.length) return markers;
+    };
+
+    // Public data interface
+    m.features = function(x) {
+        // Return features
+        if (!arguments.length) return features;
+
+        // Clear features
+        while (parent.hasChildNodes()) {
+            // removing lastChild iteratively is faster than
+            // innerHTML = ''
+            // http://jsperf.com/innerhtml-vs-removechild-yo/2
+            parent.removeChild(parent.lastChild);
+        }
+
+        // clear markers representation
+        markers = [];
+        // Set features
+        if (!x) x = [];
+        features = x.slice();
+
+        features.sort(sorter);
+
+        for (var i = 0; i < features.length; i++) {
+            m.add({
+                element: factory(features[i]),
+                location: new MM.Location(features[i].geometry.coordinates[1], features[i].geometry.coordinates[0]),
+                data: features[i]
+            });
+        }
+
+        if (m.map && m.map.coordinate) m.map.draw();
+
+        return m;
+    };
+
+    m.url = function(x, callback) {
+        if (!arguments.length) return urls;
+        if (typeof reqwest === 'undefined') throw 'reqwest is required for url loading';
+        if (typeof x === 'string') x = [x];
+
+        urls = x;
+        function add_features(x) {
+            if (x && x.features) m.features(x.features);
+            if (callback) callback(x.features, m);
+        }
+
+        reqwest((urls[0].match(/geojsonp$/)) ? {
+            url: urls[0] + (~urls[0].indexOf('?') ? '&' : '?') + 'callback=grid',
+            type: 'jsonp',
+            jsonpCallback: 'callback',
+            success: add_features,
+            error: add_features
+        } : {
+            url: urls[0],
+            type: 'json',
+            success: add_features,
+            error: add_features
+        });
+        return m;
+    };
+
+    m.extent = function() {
+        var ext = [{ lat: Infinity, lon: Infinity}, { lat: -Infinity, lon: -Infinity }];
+        var ft = m.features();
+        for (var i = 0; i < ft.length; i++) {
+            var coords = ft[i].geometry.coordinates;
+            if (coords[0] < ext[0].lon) ext[0].lon = coords[0];
+            if (coords[1] < ext[0].lat) ext[0].lat = coords[1];
+            if (coords[0] > ext[1].lon) ext[1].lon = coords[0];
+            if (coords[1] > ext[1].lat) ext[1].lat = coords[1];
+        }
+        return ext;
+    };
+
+    // Factory interface
+    m.factory = function(x) {
+        if (!arguments.length) return factory;
+        factory = x;
+        return m;
+    };
+    m.factory(function defaultFactory(feature) {
+        var d = document.createElement('div');
+        d.className = 'mmg-default';
+        d.style.position = 'absolute';
+        return d;
+    });
+
+    m.sort = function(x) {
+        if (!arguments.length) return sorter;
+        sorter = x;
+        return m;
+    };
+    m.sort(function(a, b) {
+        return b.geometry.coordinates[1] -
+          a.geometry.coordinates[1];
+    });
+
+    m.destroy = function() {
+        if (this.parent.parentNode) {
+          this.parent.parentNode.removeChild(this.parent);
         }
     };
 
-    l.factory = function(x) {
-      if (!x) return factory;
-      factory = x;
-      return this;
-    };
+    // The parent DOM element
+    var parent = document.createElement('div');
+    parent.style.cssText = 'position: absolute; top: 0px;' +
+        'left: 0px; width: 100%; height: 100%; margin: 0; padding: 0; z-index: 0';
+    m.parent = parent;
 
-    l.parent = parent;
-
-    l.factory(defaultFactory);
-
-
-    return l;
+    return m;
 }

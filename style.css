@@ -399,3 +399,59 @@ a.zoomer {
 @-moz-keyframes fade-in { from { opacity:0; } to { opacity:1; } }
 @-ms-keyframes fade-in { from { opacity:0; } to { opacity:1; } }
 @-o-keyframes fade-in { from { opacity:0; } to { opacity:1; } }
+
+
+
+.markerfilter {
+  margin: 5px;
+  padding: 10px;
+  background:#eee;
+}
+
+.symbolfilter {
+  margin: 5px;
+  padding: 10px;
+  background:#eee;
+}
+
+.selected {
+  background:#369;
+  background: #ddd;
+  border-left: none;
+}
+
+.symbolfilter:hover {
+  background: #bbb;
+  cursor: pointer;
+}
+
+.selected:hover {
+  background: #fff;
+}
+
+.colorfilter {
+  margin: 5px;
+  width: 100%;
+  height: 25px;
+  width: 206px;
+}
+
+.description {
+  background:#eee;
+  padding: 5px;
+  margin: 10px 0;
+  border-left-width: 4px;
+  border-left-style: solid;
+  opacity: 1;
+}
+
+.description:hover {
+  background: #bbb;
+  cursor: pointer;
+}
+
+#about {
+}
+
+#content {
+}
