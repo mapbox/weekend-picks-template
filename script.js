@@ -3,6 +3,7 @@
         layers;
 
     Map = function(el, l, callback) {
+        var map = this;
         wax.tilejson(l.api, function(t) {
             var handlers = [
                 new MM.DragHandler(),
@@ -17,7 +18,7 @@
             }
 
             MM_map = new MM.Map(el, new wax.mm.connector(t), null, handlers);
-            MM_map.setCenterZoom({
+            setCenterOffset(MM_map, {
                 lat: (l.center) ? l.center.lat : t.center[1],
                 lon: (l.center) ? l.center.lon : t.center[0]
             }, (l.center) ? l.center.zoom : t.center[2]);
@@ -135,7 +136,7 @@
                     .to(MM_map.locationCoordinate({ lat: lat, lon: lon })
                     .zoomTo(zoom)).run(l.center.ease);
             } else {
-                MM_map.setCenterZoom({ lat: lat, lon: lon }, zoom);
+                setCenterOffset(MM_map, { lat: lat, lon: lon }, zoom);
             }
         }
     };
@@ -288,7 +289,7 @@ function bindGeocoder() {
                             MM_map.addLayer(MM_map.geocodeLayer);
                         }
 
-                        MM_map.setCenter({ lat: r.lat, lon: r.lon });
+                        setCenterOffset(MM_map, { lat: r.lat, lon: r.lon });
                     }
                 }
             }
@@ -333,3 +334,14 @@ Map.bootstrap = function(l) {
     bindGeocoder();
     Map.parseHash();
 };
+
+// Set center on map while offsetting to compensate for drawer if open.
+var setCenterOffset = function(map, location, zoom) {
+    if (zoom)
+        map.setZoom(zoom);
+    var drawerWidth = 320;
+    var point = map.locationPoint(location);
+    point.x += drawerWidth / 2;
+    location = map.pointLocation(point);
+    map.setCenter(location);
+}
