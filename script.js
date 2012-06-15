@@ -280,6 +280,15 @@ function bindGeocoder() {
                             'properties': {}
                         }]};
 
+                        if (MM_map.geocodeLayer) {
+                            MM_map.geocodeLayer.removeAllMarkers();
+                            MM_map.geocodeLayer.features(point.features);
+                        } else {
+                            MM_map.geocodeLayer = mmg()
+                                .features(point.features);
+                            MM_map.addLayer(MM_map.geocodeLayer);
+                        }
+
                         setCenterOffset(MM_map, { lat: r.lat, lon: r.lon });
                     }
                 }
