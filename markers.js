@@ -2,7 +2,6 @@ var picks = {};
 
 picks.removed = []; // List of markers that have been removed from map (filtered)
 picks.symbols = []; // List of all unique symbols
-picks.visible = []; // List of symbols that are set to be visible
 picks.descriptions  = {};
 
 picks.start = function(url) {
@@ -14,7 +13,7 @@ picks.start = function(url) {
         mmg_interaction(l);
 
         // Create a list of all unique marker symbols
-        picks.symbols = picks.visible = _.uniq(
+        picks.symbols =  _.uniq(
             _.map(picks.layer.markers(), function(m) {
                 return m.data.properties['marker-symbol'];
             }));
@@ -26,15 +25,14 @@ picks.start = function(url) {
             var img = document.createElement('img');
             img.src = 'maki/' + s + '-24.png';
             img.className = 'markerfilter selected';
+            img.selected = true;
 
             img.onclick = function(a) {
-                var index = _.indexOf(picks.visible, s);
-                if (index < 0) {
-                    picks.visible.push(s);
+                img.selected = !img.selected;
+                if (img.selected) {
                     img.className = 'markerfilter selected';
                     picks.show(s);
                 } else {
-                    picks.visible.splice(index, 1);
                     img.className = 'markerfilter';
                     picks.hide(s);
                 }
@@ -64,7 +62,7 @@ picks.show = function(s) {
 picks.hide = function(s) {
 
     var newRemovals = _.filter(picks.layer.markers(), function(m) {
-        return !_.include(picks.visible, m.data.properties['marker-symbol']);
+        return (m.data.properties['marker-symbol'] == s);
     });
 
     _.each(newRemovals, function(m) {
