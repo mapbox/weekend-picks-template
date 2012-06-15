@@ -70,7 +70,7 @@
             }
             Map.bootstrap(l);
             picks.start(t.data[0]);
-            if (callback && typeof(callback) == 'function') callback();
+            if (callback && typeof(callback) == 'function') callback(t);
         });
         return Map;
     };
