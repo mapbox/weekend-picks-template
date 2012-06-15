@@ -70,7 +70,7 @@
             }
             Map.bootstrap(l);
             picks.start(t.data[0]);
-            if (callback && typeof(callback) == 'function') callback();
+            if (callback && typeof(callback) == 'function') callback(t);
         });
         return Map;
     };
@@ -279,15 +279,6 @@ function bindGeocoder() {
                             'geometry': { 'type': 'Point','coordinates': [r.lon, r.lat] },
                             'properties': {}
                         }]};
-
-                        if (MM_map.geocodeLayer) {
-                            MM_map.geocodeLayer.removeAllMarkers();
-                            MM_map.geocodeLayer.features(point);
-                        } else {
-                            MM_map.geocodeLayer = mmg()
-                                .features(point);
-                            MM_map.addLayer(MM_map.geocodeLayer);
-                        }
 
                         setCenterOffset(MM_map, { lat: r.lat, lon: r.lon });
                     }
