@@ -405,28 +405,35 @@ a.zoomer {
 /* Filter button styles */
 
 .markerfilter {
-  font-size: 18px;
-  text-align: center;
-  font-weight: bold;
   margin: 5px;
   padding: 10px;
   width: 35px;
   height: 35px;
   background: black;
-  color: white;
   overflow: hidden;
   display: block;
   float: left;
 }
 
 .markerfilter:hover {
-  background: white;
+  border: 3px solid #AA0000;
+  margin: 2px;
   cursor: pointer;
 }
 
 .selected {
-  background: white;
-  color: black;
+  border: 3px solid #AA0000;
+  margin: 2px;
+}
+
+#null {
+  padding-top:18px;
+  padding-bottom:19px;
+  height: 18px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
 }
 
 strong { font-weight:bold; }
