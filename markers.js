@@ -35,29 +35,27 @@ picks.start = function(url) {
         var container = document.getElementById('about');
         _.each(picks.symbols, function(s) {
 
-            img = document.createElement('img');
-            img.src = 'http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png';
+            var el = document.createElement('a');
+            el.className = 'markerfilter';
+            el.selected = false;
+            el.id = s;
+            el.href = '#';
+            $(el).css('background-image', 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)');
 
-            var div = document.createElement('div');
-            div.className = 'markerfilter';
-            div.selected = false;
-            div.id = s;
-
-            div.onclick = function(a) {
+            el.onclick = function(a) {
                 if (picks.selected == s) {
                     picks.selected = null;
                     document.getElementById('null').className = 'markerfilter selected';
-                    div.className = 'markerfilter';
+                    el.className = 'markerfilter';
                 } else {
                     document.getElementById(picks.selected).className = 'markerfilter';
-                    div.className = 'markerfilter selected';
+                    el.className = 'markerfilter selected';
                     picks.selected = s;
                 }
                 picks.show(picks.selected);
             }
 
-            div.appendChild(img);
-            container.appendChild(div);
+            container.appendChild(el);
         });
 
     });

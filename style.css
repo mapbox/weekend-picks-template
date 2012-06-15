@@ -406,13 +406,20 @@ a.zoomer {
 
 .markerfilter {
   margin: 5px;
-  padding: 10px;
-  width: 35px;
-  height: 35px;
-  background: black;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+
+  background:#000 no-repeat 50% 8px;
   overflow: hidden;
   display: block;
   float: left;
+
+  text-transform:uppercase;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
 }
 
 .markerfilter:hover {
@@ -424,16 +431,6 @@ a.zoomer {
 .selected {
   border: 3px solid #AA0000;
   margin: 2px;
-}
-
-#null {
-  padding-top:18px;
-  padding-bottom:19px;
-  height: 18px;
-  font-size: 18px;
-  text-align: center;
-  font-weight: bold;
-  color: white;
 }
 
 strong { font-weight:bold; }
