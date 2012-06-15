@@ -402,39 +402,29 @@ a.zoomer {
 @-o-keyframes fade-in { from { opacity:0; } to { opacity:1; } }
 
 
+/* Filter button styles */
 
 .markerfilter {
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
   margin: 5px;
   padding: 10px;
-  height: 24px;
   width: 35px;
   height: 35px;
-  display: inline-block;
   background: black;
   color: white;
+  overflow: hidden;
+  display: block;
+  float: left;
 }
 
-.symbolfilter {
-  margin: 5px;
-  padding: 10px;
-  background:#eee;
+.markerfilter:hover {
+  background: white;
+  cursor: pointer;
 }
 
 .selected {
   background: white;
   color: black;
-}
-
-.symbolfilter:hover {
-  background: #bbb;
-  cursor: pointer;
-}
-
-.selected:hover {
-  background: #fff;
-}
-
-.inner {
-  width: 34px;
-  height: 44px;
 }

@@ -22,7 +22,9 @@ picks.start = function(url) {
         var all = document.getElementById('null');
         all.onclick = function() {
             if (picks.selected) {
+                // Deselect other button
                 document.getElementById(picks.selected).className = 'markerfilter';
+                // Select all button
                 all.className = 'markerfilter selected';
                 picks.selected = null;
                 picks.show(picks.selected);
@@ -33,9 +35,8 @@ picks.start = function(url) {
         var container = document.getElementById('about');
         _.each(picks.symbols, function(s) {
 
-            var img = document.createElement('div');
-            img.style.backgroundImage = 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)';
-            img.className = 'inner';
+            img = document.createElement('img');
+            img.src = 'http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png';
 
             var div = document.createElement('div');
             div.className = 'markerfilter';
