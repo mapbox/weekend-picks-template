@@ -406,7 +406,12 @@ a.zoomer {
 .markerfilter {
   margin: 5px;
   padding: 10px;
-  background:#eee;
+  height: 24px;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  background: black;
+  color: white;
 }
 
 .symbolfilter {
@@ -416,9 +421,8 @@ a.zoomer {
 }
 
 .selected {
-  background:#369;
-  background: #ddd;
-  border-left: none;
+  background: white;
+  color: black;
 }
 
 .symbolfilter:hover {
@@ -430,31 +434,9 @@ a.zoomer {
   background: #fff;
 }
 
-.colorfilter {
-  margin: 5px;
-  width: 100%;
-  height: 25px;
-  width: 206px;
-}
-
-.description {
-  background:#eee;
-  padding: 5px;
-  margin: 10px 0;
-  border-left-width: 4px;
-  border-left-style: solid;
-  opacity: 1;
-}
-
-.description:hover {
-  background: #bbb;
-  cursor: pointer;
-}
-
-#about {
-}
-
-#content {
+.inner {
+  width: 34px;
+  height: 44px;
 }
 
 strong { font-weight:bold; }

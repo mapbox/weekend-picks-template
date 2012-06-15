@@ -2,7 +2,7 @@ var picks = {};
 
 picks.removed = []; // List of markers that have been removed from map (filtered)
 picks.symbols = []; // List of all unique symbols
-picks.descriptions  = {};
+picks.selected = null;
 
 picks.start = function(url) {
 
@@ -18,27 +18,45 @@ picks.start = function(url) {
                 return m.data.properties['marker-symbol'];
             }));
 
+        // Set up all button
+        var all = document.getElementById('null');
+        all.onclick = function() {
+            if (picks.selected) {
+                document.getElementById(picks.selected).className = 'markerfilter';
+                all.className = 'markerfilter selected';
+                picks.selected = null;
+                picks.show(picks.selected);
+            }
+        }
+
         // Create a symbol based filter
         var container = document.getElementById('about');
         _.each(picks.symbols, function(s) {
 
-            var img = document.createElement('img');
-            img.src = 'maki/' + s + '-24.png';
-            img.className = 'markerfilter selected';
-            img.selected = true;
+            var img = document.createElement('div');
+            img.style.backgroundImage = 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)';
+            img.className = 'inner';
 
-            img.onclick = function(a) {
-                img.selected = !img.selected;
-                if (img.selected) {
-                    img.className = 'markerfilter selected';
-                    picks.show(s);
+            var div = document.createElement('div');
+            div.className = 'markerfilter';
+            div.selected = false;
+            div.id = s;
+
+            div.onclick = function(a) {
+                if (picks.selected == s) {
+                    picks.selected = null;
+                    document.getElementById('null').className = 'markerfilter selected';
+                    div.className = 'markerfilter';
                 } else {
-                    img.className = 'markerfilter';
-                    picks.hide(s);
+                    document.getElementById(picks.selected).className = 'markerfilter';
+                    div.className = 'markerfilter selected';
+                    picks.selected = s;
                 }
+                picks.show(picks.selected);
             }
 
-            container.appendChild(img);
+            div.appendChild(img);
+            container.appendChild(div);
         });
 
     });
@@ -50,23 +68,21 @@ picks.start = function(url) {
 // Set all markers with specified symbol to be shown
 picks.show = function(s) {
 
-    picks.removed = _.reject(picks.removed, function(m) {
-        if (m.data.properties['marker-symbol'] == s) {
-            picks.layer.add(m);
-            return true;
-        }
+    // re-add removed markers
+    _.each(picks.removed, function(m) {
+        picks.layer.add(m);
     });
+    picks.removed = [];
+
+    if (s) {
+        // show markers in category
+        picks.removed = _.reject(picks.layer.markers(), function(m) {
+            return (m.data.properties['marker-symbol'] == s);
+        });
+        
+        _.each(picks.removed, function(m) {
+            picks.layer.remove(m);
+        });
+    }
     picks.layer.draw();
-}
-
-picks.hide = function(s) {
-
-    var newRemovals = _.filter(picks.layer.markers(), function(m) {
-        return (m.data.properties['marker-symbol'] == s);
-    });
-
-    _.each(newRemovals, function(m) {
-        picks.layer.remove(m);
-        picks.removed.push(m);
-    });
 }
