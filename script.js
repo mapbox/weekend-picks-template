@@ -282,10 +282,10 @@ function bindGeocoder() {
 
                         if (MM_map.geocodeLayer) {
                             MM_map.geocodeLayer.removeAllMarkers();
-                            MM_map.geocodeLayer.geojson(point);
+                            MM_map.geocodeLayer.features(point);
                         } else {
                             MM_map.geocodeLayer = mmg()
-                                .geojson(point);
+                                .features(point);
                             MM_map.addLayer(MM_map.geocodeLayer);
                         }
 
