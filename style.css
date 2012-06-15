@@ -126,7 +126,7 @@ body > div {
 }
 #content {
   position:absolute;
-  top:50px;
+  top:0px;
   right:0;
   bottom:0;
   width:279px;
@@ -207,7 +207,8 @@ form.geocode.loading input[type=submit] {
   font-size:11px;
 }
 a.zoomer {
-  top:60px;
+  position: absolute;
+  top: 10px;
 }
 
 .wax-tooltip {
@@ -235,7 +236,7 @@ a.zoomer {
   margin-top:0.5em;
 }
 .share {
-  top:95px;
+  top:45px;
   z-index:1000;
 }
 

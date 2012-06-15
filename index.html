@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>D.C. Weekend Picks</title>
     <link rel="stylesheet" href="map.css" type="text/css" />
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="stylesheet" href="ext/mmg.css" type="text/css" />
     <link rel="shortcut icon" href="http://mapbox.com/images/favicon.ico" type="image/x-icon" />
-</head>
-<body class="right">
-    <div id="header"><div class="limiter">
-        <img src="img/logo.png">
-        <h1>D.C. Weekend Picks</h1>
-    </div></div>
+  </head>
+  <body class="right">
+    <div id="branding"></div>
     <div id="content"><div class="limiter">
-        <h1>D.C. Weekend Picks</h1>
-        <p>Description to be elaborated on once we have a better idea of what the actual picks will be. Something something it is a list of something to show things you can do this weekend.</p>
-    <div id="about"></div>
+        <div id="about">
+          <h1>D.C. Weekend Picks</h1>
+          <p>There's a lot going on in Washington DC. Every weekend, the DCist has new suggestions for places to go and things to do. Explore this weekend's picks and see what's going on near you.</p>
+        </div>
         <h2>Search for picks nearby</h2>
         <div data-control='geocode' id="search">
           <form class="geocode">
@@ -40,31 +38,26 @@
     <script src="ext/mmg_interaction.js"></script>
     <script src="markers.js"></script>
     <script src="script.js"></script>
-    
+
     <!-- Site configuration -->
     <script type="text/javascript">
 
-        // Make a new map in #map
-        var main = Map('map', {
-            api: 'http://a.tiles.mapbox.com/v3/examples.map-8j8lv902.jsonp',
-            center: {
-                lat: 38.9050033656251,
-                lon: -77.01439615889109,
-                zoom: 14
-            },
-            zoomRange: [0, 15],
-            features: [
-                'zoomwheel',
-                'tooltips',
-                'zoombox',
-                'zoompan',
-                'legend',
-                'share',
-                'layerHash'
-            ]
-        });
+      // Make a new map in #map
+    var main = Map('map', {
+      api: 'http://a.tiles.mapbox.com/v3/examples.map-8j8lv902.jsonp',
+      zoomRange: [0, 15],
+      features: [
+        'zoomwheel',
+        'tooltips',
+        'zoombox',
+        'zoompan',
+        'legend',
+        'share',
+        'layerHash'
+      ]
+    });
 
-        main.layers({});
-    </script>
+main.layers({});
+</script>
 </body>
 </html>
