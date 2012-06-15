@@ -53,6 +53,7 @@ picks.start = function(url) {
                     picks.selected = s;
                 }
                 picks.show(picks.selected);
+                return false;
             }
 
             container.appendChild(el);
