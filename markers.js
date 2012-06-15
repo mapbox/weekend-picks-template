@@ -1,80 +1,74 @@
-var markers = {
+var picks = {};
 
-    removed: [], // Array of markers not currently displayed on map
-    symbols: [], // Array of all symbols in marker layer
-    colors: [], // Array of all colors in marker layer
-    visible: [], // Array of symbol names that are currently visible
-    descriptions : {},
+picks.removed = []; // List of markers that have been removed from map (filtered)
+picks.symbols = []; // List of all unique symbols
+picks.visible = []; // List of symbols that are set to be visible
+picks.descriptions  = {};
 
-    init: function(url) {
-        // Create marker layer
-        markers.layer = mmg().factory(simplestyle_factory).url(url, function(feat, l) {
-            mmg_interaction(l);
+picks.start = function(url) {
 
-            // Create a list of all marker symbols
-            markers.symbols = markers.visible = _.uniq(
-                _.map(markers.layer.markers(), function(m) {
-                    return m.data.properties['marker-symbol'];
-                }));
+    // Create marker layer
+    picks.layer = mmg().factory(simplestyle_factory).url(url, function(feat, l) {
 
-            // Create a list of all marker colors
-            markers.colors = _.uniq(
-                _.map(markers.layer.markers(), function(m) {
-                    return m.data.properties['marker-color'];
-                }));
+        // Add interaction
+        mmg_interaction(l);
 
-            // Symbol filter
-            var cont = document.getElementById('about');
-            _.each(markers.symbols, function(s) {
-                var img = document.createElement('img');
-                img.symbol = s;
-                img.src = 'maki/' + s + '-24.png';
-                img.className = 'markerfilter selected';
-                img.onclick = function(a) {
-                    var index = _.indexOf(markers.visible, s);
-                    console.log(index);
-                    if (index < 0) {
-                        markers.visible.push(s);
-                        img.className = 'markerfilter selected';
-                    } else {
-                        markers.visible.splice(index, 1);
-                        img.className = 'markerfilter';
-                    }
-                    console.log(markers.visible);
+        // Create a list of all unique marker symbols
+        picks.symbols = picks.visible = _.uniq(
+            _.map(picks.layer.markers(), function(m) {
+                return m.data.properties['marker-symbol'];
+            }));
 
+        // Create a symbol based filter
+        var container = document.getElementById('about');
+        _.each(picks.symbols, function(s) {
 
-                    markers.filter(markers.visible);
+            var img = document.createElement('img');
+            img.src = 'maki/' + s + '-24.png';
+            img.className = 'markerfilter selected';
+
+            img.onclick = function(a) {
+                var index = _.indexOf(picks.visible, s);
+                if (index < 0) {
+                    picks.visible.push(s);
+                    img.className = 'markerfilter selected';
+                    picks.show(s);
+                } else {
+                    picks.visible.splice(index, 1);
+                    img.className = 'markerfilter';
+                    picks.hide(s);
                 }
-                cont.appendChild(img);
-            });
+            }
 
-        });
-        MM_map.addLayer(markers.layer);
-
-    },
-
-
-    filter: function() {
-        var newRemovals = _.filter(markers.layer.markers(), function(m) {
-            return !_.include(markers.visible, m.data.properties['marker-symbol']);
+            container.appendChild(img);
         });
 
-        var newAdditions = _.filter(markers.removed, function(m) {
-            return _.include(markers.visible, m.data.properties['marker-symbol']);
-        });
+    });
+    MM_map.addLayer(picks.layer);
 
-        _.each(newRemovals, function(m) {
-            markers.layer.remove(m);
-            markers.removed.push(m);
-            m.desc.style.display = 'none';
-        });
+}
 
-        _.each(newAdditions, function(m) {
-            markers.layer.add(m);
-            markers.removed.splice(_.indexOf(markers.removed, m), 1);
-            m.desc.style.display = 'block';
-        });
 
-        if (newAdditions.length) markers.layer.draw(); // Fix positioning of markers
-    }
+// Set all markers with specified symbol to be shown
+picks.show = function(s) {
+
+    picks.removed = _.reject(picks.removed, function(m) {
+        if (m.data.properties['marker-symbol'] == s) {
+            picks.layer.add(m);
+            return true;
+        }
+    });
+    picks.layer.draw();
+}
+
+picks.hide = function(s) {
+
+    var newRemovals = _.filter(picks.layer.markers(), function(m) {
+        return !_.include(picks.visible, m.data.properties['marker-symbol']);
+    });
+
+    _.each(newRemovals, function(m) {
+        picks.layer.remove(m);
+        picks.removed.push(m);
+    });
 }

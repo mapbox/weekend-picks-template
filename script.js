@@ -68,7 +68,7 @@
                 }
             }
             Map.bootstrap(l);
-            markers.init(t.data[0]);
+            picks.start(t.data[0]);
             if (callback && typeof(callback) == 'function') callback();
         });
         return Map;
