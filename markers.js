@@ -32,7 +32,7 @@ picks.start = function(url) {
         }
 
         // Create a symbol based filter
-        var container = document.getElementById('about');
+        var container = document.getElementById('markerfilters');
         _.each(picks.symbols, function(s) {
 
             var el = document.createElement('a');
