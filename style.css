@@ -132,13 +132,9 @@ body > div {
   background:#369;
   color:white;
 }
-p {
-  margin-bottom:1em;
-}
+p { margin-bottom:20px;}
 
-label {
-  font-weight:700;
-  }
+label { font-weight:700;}
 
 form.geocode input[type=text] {
   height: 20px;
@@ -415,6 +411,12 @@ a.zoomer {
   opacity: .3;
   border-radius: 5px;
   -moz-border-radius: 5px;
+
+  transition: opacity 200ms;
+  -moz-transition: opacity 200ms; /* Firefox 4 */
+  -webkit-transition: opacity 200ms; /* Safari and Chrome */
+  -o-transition: opacity 200ms; /* Opera */
+
 
   background:#000 no-repeat 50% 7px;
   overflow: hidden;
