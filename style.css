@@ -65,10 +65,12 @@ h1, h2, h3, h4, h5, h6 {
   margin:0 0 10px 0;
 }
 
-h1 {
+#about h1 {
   line-height: 1.75em;
   font-size: 1.5em;
   margin-bottom: 10px;
+  background: url(img/logo.png) 0px -1px no-repeat;
+  padding: 5px 0 5px 58px;
 
 }
 h2 {
@@ -95,40 +97,7 @@ body > div {
   left:0;
   z-index:0;
 }
-#header {
-  position:absolute;
-  top:0;
-  right:0;
-  left:0;
-  height:29px;
-  background:rgb(255,255,255);
-  background:rgba(255,255,255, 0.9);
-  border-bottom:1px solid #ccc;
-  overflow:hidden;
-  padding:10px 0;
-  z-index:2;
-}
-#header img {
-  display:block;
-  float:left;
-  margin:-13px 20px 0 0;
-  top:50%;
-  position:relative;
-}
-#header h1 {
-  display:block;
-  float:left;
-  line-height:30px;
-  margin:0;
-  background: url(img/logo.png) 0px -1px no-repeat;
-  padding: 5px 0 5px 58px;
-}
-#header .limiter {
-  width:920px;
-  margin:0px auto;
-  position:relative;
-  height:100%;
-}
+
 #content {
   position:absolute;
   top:0px;
