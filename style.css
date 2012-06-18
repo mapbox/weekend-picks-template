@@ -132,13 +132,9 @@ body > div {
   background:#369;
   color:white;
 }
-p {
-  margin-bottom:1em;
-}
+p { margin-bottom:20px;}
 
-label {
-  font-weight:700;
-  }
+label { font-weight:700;}
 
 form.geocode input[type=text] {
   height: 20px;

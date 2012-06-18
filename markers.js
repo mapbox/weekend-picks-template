@@ -13,50 +13,50 @@ picks.start = function(url) {
         mmg_interaction(l);
 
         // Create a list of all unique marker symbols
-        picks.symbols =  $.unique(
+        $.each(
             $.map(picks.layer.markers(), function(m) {
                 return m.data.properties['marker-symbol'];
-            }));
+            }), function(index, s) {
+                if ($.inArray(s, picks.symbols) < 0) picks.symbols.push(s);
+            });
 
         // Set up all button
-        var all = document.getElementById('null');
-        all.onclick = function() {
+        var all = $('#null');
+        all.click(function() {
             if (picks.selected) {
                 // Deselect other button
-                document.getElementById(picks.selected).className = 'markerfilter';
+                $('#' + picks.selected).removeClass('selected');
                 // Select all button
-                all.className = 'markerfilter selected';
+                all.addClass('selected');
                 picks.selected = null;
                 picks.show(picks.selected);
             }
-        }
+        });
 
         // Create a symbol based filter
-        var container = document.getElementById('markerfilters');
+        var container = $('#markerfilters');
         $.each(picks.symbols, function(index, s) {
 
-            var el = document.createElement('a');
-            el.className = 'markerfilter';
-            el.selected = false;
-            el.id = s;
-            el.href = '#';
-            $(el).css('background-image', 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)');
+            var el = $(document.createElement('a'))
+                .addClass('markerfilter')
+                .attr('id', s)
+                .css('background-image', 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)');
 
-            el.onclick = function(a) {
+            el.click(function(a) {
                 if (picks.selected == s) {
                     picks.selected = null;
-                    document.getElementById('null').className = 'markerfilter selected';
-                    el.className = 'markerfilter';
+                    $('#null').addClass('selected');
+                    el.removeClass('selected');
                 } else {
-                    document.getElementById(picks.selected).className = 'markerfilter';
-                    el.className = 'markerfilter selected';
+                    $('#' + picks.selected).removeClass('selected');
+                    el.addClass('selected');
                     picks.selected = s;
                 }
                 picks.show(picks.selected);
                 return false;
-            }
+            });
 
-            container.appendChild(el);
+            container.append(el);
         });
 
     });
