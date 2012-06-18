@@ -32,7 +32,6 @@
 
     <!-- External libraries and site script -->
     <script src="ext/jquery.min.js"></script>
-    <script src="ext/underscore.js"></script>
     <script src="ext/modestmaps.min.js"></script>
     <script src="ext/wax/wax.mm.js"></script>
     <script src="ext/wax/wax.ext.js"></script>
@@ -46,13 +45,12 @@
     <!-- Site configuration -->
     <script type="text/javascript">
 
-      // Make a new map in #map
+    // Make a new map in #map
     var main = Map('map', {
       api: 'http://a.tiles.mapbox.com/v3/examples.map-8j8lv902.jsonp',
       zoomRange: [0, 15],
       features: [
         'zoomwheel',
-        'tooltips',
         'zoombox',
         'zoompan',
         'legend',
@@ -60,12 +58,11 @@
         'layerHash'
       ]
     }, function(tilejson) {
-      $('title').text(tilejson.name);
+      document.title = tilejson.name;
       $('h1.map-title').text(tilejson.name);
       $('p.description').text(tilejson.description);
     });
 
-main.layers({});
-</script>
+    </script>
 </body>
 </html>
