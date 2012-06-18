@@ -52,7 +52,8 @@ table {
 body,
 input,
 textarea {
-  font:13px/16px arial,helvetica,clean,sans-serif;
+  font:14px/21px arial,helvetica,clean,sans-serif;
+  color: #444;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -61,16 +62,20 @@ code { font:normal 12px/20px monospace; }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight:700;
-  margin:1em 0;
+  margin:0 0 10px 0;
 }
 
-h1 {
-  line-height:1.75em;
-  font-size:1.5em;
+#about h1 {
+  line-height: 1.75em;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  background: url(img/logo.png) 0px -1px no-repeat;
+  padding: 5px 0 5px 58px;
+
 }
 h2 {
   line-height:1.5em;
-  font-size:1.25em;
+  font-size:1em;
 }
 
 a {
@@ -92,38 +97,7 @@ body > div {
   left:0;
   z-index:0;
 }
-#header {
-  position:absolute;
-  top:0;
-  right:0;
-  left:0;
-  height:29px;
-  background:rgb(255,255,255);
-  background:rgba(255,255,255, 0.9);
-  border-bottom:1px solid #ccc;
-  overflow:hidden;
-  padding:10px 0;
-  z-index:2;
-}
-#header img {
-  display:block;
-  float:left;
-  margin:-13px 20px 0 0;
-  top:50%;
-  position:relative;
-}
-#header h1 {
-  display:block;
-  float:left;
-  line-height:30px;
-  margin:0;
-}
-#header .limiter {
-  width:920px;
-  margin:0px auto;
-  position:relative;
-  height:100%;
-}
+
 #content {
   position:absolute;
   top:0px;
@@ -138,9 +112,13 @@ body > div {
   padding:20px;
 }
 
-.search-wrapper {
-  clear: both;
-  padding-top: 10px;
+.section {
+  width: 249px;
+  margin-bottom: 20px;
+  background: #ececec;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 15px;
 }
 
 .layers a {
@@ -160,23 +138,23 @@ p {
 
 label {
   font-weight:700;
-}
-#about p {
-  font-size:20px;
-  line-height:30px;
-  display:block;
-}
+  }
+
 form.geocode input[type=text] {
-  height:20px;
-  display:block;
-  border:1px solid  #ccc;
-  float:left;
+  height: 20px;
+  display: block;
+  border: 1px solid #CCC;
+  padding: 5px;
+  float: left;
+  width: 185px;
+  margin: 0px 5px;
+  line-height: 12px;
 }
 form.geocode input[type=submit] {
-  background:url(img/map.png) no-repeat -125px -4px #fff;
+  background:url(img/map.png) no-repeat -121px -0px #fff;
   text-indent:-9999px;
-  width:20px;
-  height:20px;
+  width:32px;
+  height:32px;
   display:block;
   border:1px solid  #ccc;
   border-radius:3px;
@@ -185,7 +163,7 @@ form.geocode input[type=submit] {
   box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
   -moz-box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
   -webkit-box-shadow:rgba(0,0,0,0.1) 0px 1px 3px;
-  margin:0 0 0 3px;
+  margin: 0px 5px;
   padding:11px;
   float:left;
 }
@@ -209,7 +187,7 @@ form.geocode.loading input[type=submit] {
   position:relative;
   top:1em;
   clear:both;
-  color:red;
+  color:#a21a1a;
   font-size:11px;
 }
 a.zoomer {
@@ -225,7 +203,7 @@ a.zoomer {
 
 .wax-intip {
   border: 1px solid #CCC !important;
-  color: #222 !important;
+  color: #444 !important;
   padding: 15px !important;
   margin-bottom: 5px;
   }
@@ -431,12 +409,20 @@ a.zoomer {
 
 .markerfilter {
   margin: 5px;
-  width: 59px;
-  height: 59px;
+  width: 52px;
+  height: 52px;
   line-height: 55px;
-  opacity: .5;
+  opacity: .3;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
 
-  background:#000 no-repeat 50% 8px;
+  transition: opacity 200ms;
+  -moz-transition: opacity 200ms; /* Firefox 4 */
+  -webkit-transition: opacity 200ms; /* Safari and Chrome */
+  -o-transition: opacity 200ms; /* Opera */
+
+
+  background:#000 no-repeat 50% 7px;
   overflow: hidden;
   display: block;
   float: left;
@@ -449,7 +435,7 @@ a.zoomer {
 }
 
 .markerfilter:hover {
-  opacity: .8;
+  opacity: .6;
   cursor: pointer;
 }
 
@@ -461,3 +447,15 @@ a.zoomer {
   }
 
 strong { font-weight:bold; }
+
+/* Clearfix */
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="map.css" type="text/css" />
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="stylesheet" href="ext/mmg.css" type="text/css" />
-    <link rel="shortcut icon" href="http://mapbox.com/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   </head>
   <body class="right">
     <div id="branding"></div>
@@ -14,19 +14,18 @@
         <div id="about">
           <h1 class='map-title'></h1>
           <p class='description'></p>
-            <div id="markerfilters">
-              <div class="markerfilter selected" id="null">All</div>
-            </div>
-        </div>
-        <div class="search-wrapper">
-          <h2>Search nearby</h2>
-          <div data-control='geocode' id="search">
-            <form class="geocode">
-              <input placeholder='Search for an address' type="text">
-              <input type='submit' />
-              <div id='geocode-error'></div>
-            </form>
+          <h2> Filter events </h2>  
+          <div id="markerfilters" class="clearfix section">
+            <div class="markerfilter selected" id="null">All</div>
           </div>
+        </div>
+        <h2>Search nearby</h2>
+        <div data-control='geocode' class="clearfix section" id="search">
+          <form class="geocode">
+            <input placeholder='Search for an address' type="text">
+            <input type='submit' />
+            <div id='geocode-error'></div>
+          </form>
         </div>
     </div></div>
     <div id="map" class="map"></div>
@@ -46,13 +45,12 @@
     <!-- Site configuration -->
     <script type="text/javascript">
 
-      // Make a new map in #map
+    // Make a new map in #map
     var main = Map('map', {
       api: 'http://a.tiles.mapbox.com/v3/examples.map-8j8lv902.jsonp',
       zoomRange: [0, 15],
       features: [
         'zoomwheel',
-        'tooltips',
         'zoombox',
         'zoompan',
         'legend',
@@ -60,12 +58,11 @@
         'layerHash'
       ]
     }, function(tilejson) {
-      $('title').text(tilejson.name);
+      document.title = tilejson.name;
       $('h1.map-title').text(tilejson.name);
       $('p.description').text(tilejson.description);
     });
 
-main.layers({});
-</script>
+    </script>
 </body>
 </html>
