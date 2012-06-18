@@ -69,8 +69,7 @@ h1 {
   line-height: 1.75em;
   font-size: 1.5em;
   margin-bottom: 10px;
-  background: url(img/logo.png) 0px -1px no-repeat;
-  padding: 5px 0 5px 58px;
+
 }
 h2 {
   line-height:1.5em;
@@ -121,6 +120,8 @@ body > div {
   float:left;
   line-height:30px;
   margin:0;
+  background: url(img/logo.png) 0px -1px no-repeat;
+  padding: 5px 0 5px 58px;
 }
 #header .limiter {
   width:920px;
