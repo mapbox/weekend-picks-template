@@ -13,8 +13,8 @@ picks.start = function(url) {
         mmg_interaction(l);
 
         // Create a list of all unique marker symbols
-        picks.symbols =  _.uniq(
-            _.map(picks.layer.markers(), function(m) {
+        picks.symbols =  $.unique(
+            $.map(picks.layer.markers(), function(m) {
                 return m.data.properties['marker-symbol'];
             }));
 
@@ -32,8 +32,8 @@ picks.start = function(url) {
         }
 
         // Create a symbol based filter
-        var container = document.getElementById('about');
-        _.each(picks.symbols, function(s) {
+        var container = document.getElementById('markerfilters');
+        $.each(picks.symbols, function(index, s) {
 
             var el = document.createElement('a');
             el.className = 'markerfilter';
@@ -69,18 +69,18 @@ picks.start = function(url) {
 picks.show = function(s) {
 
     // re-add removed markers
-    _.each(picks.removed, function(m) {
+    $.each(picks.removed, function(index, m) {
         picks.layer.add(m);
     });
     picks.removed = [];
 
     if (s) {
         // show markers in category
-        picks.removed = _.reject(picks.layer.markers(), function(m) {
-            return (m.data.properties['marker-symbol'] == s);
+        picks.removed = $.grep(picks.layer.markers(), function(m) {
+            return m.data.properties['marker-symbol'] != s;
         });
         
-        _.each(picks.removed, function(m) {
+        $.each(picks.removed, function(index, m) {
             picks.layer.remove(m);
         });
     }

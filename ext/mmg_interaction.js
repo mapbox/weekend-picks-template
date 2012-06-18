@@ -18,10 +18,10 @@ function mmg_interaction(mmg) {
             props = feature.properties;
 
         if (props.title) {
-            o += '<strong>' + props.title + '</strong><br />';
+            o += '<h1 class="mmg-title">' + props.title + '</h1>';
         }
         if (props.description) {
-            o += props.description;
+            o += '<div class="mmg-description">' + props.description + '</div>';
         }
 
         if (typeof html_sanitize !== undefined) {
