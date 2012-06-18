@@ -18,7 +18,7 @@ picks.start = function(url) {
                 return m.data.properties['marker-symbol'];
             }), function(index, s) {
                 if ($.inArray(s, picks.symbols) < 0) picks.symbols.push(s);
-                });
+            });
 
         // Set up all button
         var all = $('#null');
