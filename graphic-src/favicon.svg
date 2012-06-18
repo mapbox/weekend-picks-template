@@ -17,7 +17,7 @@
    inkscape:export-filename="/Users/saman/work_repos/weekend-picks-template/img/favicon.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="New document 39">
+   sodipodi:docname="favicon.svg">
   <defs
      id="defs7710" />
   <sodipodi:namedview
@@ -54,7 +54,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -67,7 +67,7 @@
        id="g7756"
        transform="matrix(0.64030145,0,0,0.64030145,-51.386614,527.36128)">
       <path
-         style="color:#000000;fill:#d40000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+         style="color:#000000;fill:#444444;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.08455875;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          d="m 101.42437,803.61598 c 0,4.79188 -8.676471,16.31176 -8.676471,16.31176 0,0 -8.676471,-11.51988 -8.676471,-16.31176 0,-4.79188 3.88463,-8.67647 8.676471,-8.67647 4.791911,0 8.676471,3.88459 8.676471,8.67647 z"
          id="path6967-7-4"
          inkscape:connector-curvature="0"

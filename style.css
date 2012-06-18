@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.75em;
   font-size: 1.5em;
   margin-bottom: 10px;
-  background: url(img/logo.png) 0px -1px no-repeat;
+  background: url(img/logo.png) 0px 1px no-repeat;
   padding: 5px 0 5px 58px;
 
 }
