@@ -1,3 +1,10 @@
+# Weekend Picks
+
+This map site template demonstrates displaying and filtering point feature markers added using MapBox Hosting.
+
+To make your custom map, [sign up for MapBox](http://mapbox.com/plans/) and [create a map](http://mapbox.com/hosting/creating/). Use the markers feature to add and style your markers.
+
+
 ## About Map Site Templates
 
 [Map Site templates](http://mapbox.com/map-sites) from MapBox are a way to jumpstart building a map-based web feature. The map-site templates bundles common html and css formatting with reusable javascript components.
