@@ -57,7 +57,7 @@
         'layerHash'
       ]
     }, function(tilejson) {
-      $('title').text(tilejson.name);
+      document.title = tilejson.name;
       $('h1.map-title').text(tilejson.name);
       $('p.description').text(tilejson.description);
     });
