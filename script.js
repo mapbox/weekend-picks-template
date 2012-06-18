@@ -252,9 +252,9 @@ function bindGeocoder() {
         query = encodeURIComponent(query);
         $('form.geocode').addClass('loading');
         reqwest({
-            url: 'http://open.mapquestapi.com/nominatim/v1/search?format=json&json_callback=callback&&limit=1&q=' + query,
+            url: 'http://open.mapquestapi.com/nominatim/v1/search?format=json&&limit=1&q=' + query,
             type: 'jsonp',
-            jsonpCallback: 'callback',
+            jsonpCallback: 'json_callback',
             success: function (r) {
                 r = r[0];
 
