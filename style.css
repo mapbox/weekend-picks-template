@@ -137,6 +137,12 @@ body > div {
   overflow-y:auto;
   padding:20px;
 }
+
+.search-wrapper {
+  clear: both;
+  padding-top: 10px;
+}
+
 .layers a {
   display:block;
   padding:5px;
@@ -216,11 +222,30 @@ a.zoomer {
   right:330px;
   top:60px;
 }
+
+.wax-intip {
+  border: 1px solid #CCC !important;
+  color: #222 !important;
+  padding: 15px !important;
+  margin-bottom: 5px;
+  }
+  .wax-intip::before { 
+    border-width: 17px !important;
+    margin-left: -17px !important;
+    }
+
+.wax-intip h1 {
+  font-size: 100% !important;
+	font-weight: bold !important;
+	margin-bottom: 10px !important;
+  }
+
 .wax-legends {
   left:auto;
   right:330px;
   width:290px;
 }
+
 .wax-share h3 {
   margin:0px 0px 10px;
   font-size:16px;
@@ -406,9 +431,10 @@ a.zoomer {
 
 .markerfilter {
   margin: 5px;
-  width: 55px;
-  height: 55px;
+  width: 59px;
+  height: 59px;
   line-height: 55px;
+  opacity: .5;
 
   background:#000 no-repeat 50% 8px;
   overflow: hidden;
@@ -423,14 +449,15 @@ a.zoomer {
 }
 
 .markerfilter:hover {
-  border: 3px solid #AA0000;
-  margin: 2px;
+  opacity: .8;
   cursor: pointer;
 }
 
 .selected {
-  border: 3px solid #AA0000;
-  margin: 2px;
+  opacity: 1;
 }
+.selected:hover {
+  opacity: 1;
+  }
 
 strong { font-weight:bold; }

@@ -25,18 +25,25 @@
 	width:0;
 	position:absolute;
 	pointer-events:none;
-  }
+    }
 
 .wax-intip:after {
 	border-top-color:#fff;
 	border-width:15px;
 	left:50%;
 	margin-left:-15px;
-  }
+    }
 
 .wax-intip:before {
 	border-top-color:#ccc;
 	border-width:18px;
 	left:50%;
 	margin-left:-18px;
-  }
+    }
+
+h1.mmg-title {
+    font-size:small;
+    margin:0;
+    padding:0;
+    font-weight:normal;
+}

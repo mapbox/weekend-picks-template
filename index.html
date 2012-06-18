@@ -14,15 +14,17 @@
         <div id="about">
           <h1 class='map-title'></h1>
           <p class='description'></p>
-          <div class="markerfilter selected" id="null">All</div>
+            <div class="markerfilter selected" id="null">All</div>
         </div>
-        <h2>Search nearby</h2>
-        <div data-control='geocode' id="search">
-          <form class="geocode">
-            <input placeholder='Search for an address' type="text">
-            <input type='submit' />
-            <div id='geocode-error'></div>
-          </form>
+        <div class="search-wrapper">
+          <h2>Search nearby</h2>
+          <div data-control='geocode' id="search">
+            <form class="geocode">
+              <input placeholder='Search for an address' type="text">
+              <input type='submit' />
+              <div id='geocode-error'></div>
+            </form>
+          </div>
         </div>
     </div></div>
     <div id="map" class="map"></div>
