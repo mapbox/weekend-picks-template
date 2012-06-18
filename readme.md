@@ -1,9 +1,10 @@
 # Weekend Picks
 
-This map site template demonstrates displaying and filtering point feature markers added using MapBox Hosting.
+This map site template displays a map with markers along with a filtering interface. You can download the template, swap out the default map with one of your own, and the template will automatically update based on your map's title, description and markers.
 
-To make your custom map, [sign up for MapBox](http://mapbox.com/plans/) and [create a map](http://mapbox.com/hosting/creating/). Use the markers feature to add and style your markers.
+To make your custom map, [sign up for MapBox](http://mapbox.com/plans/) and [create a map](http://mapbox.com/hosting/creating/). [Use the markers feature](http://mapbox.com/creating/markers/) to add and style your markers.
 
+Update this project to use the TileJSON URL of your new map (details below).
 
 ## About Map Site Templates
 
