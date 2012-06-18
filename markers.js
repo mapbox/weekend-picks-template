@@ -13,10 +13,12 @@ picks.start = function(url) {
         mmg_interaction(l);
 
         // Create a list of all unique marker symbols
-        picks.symbols =  $.unique(
+        $.each(
             $.map(picks.layer.markers(), function(m) {
                 return m.data.properties['marker-symbol'];
-            }));
+            }), function(index, s) {
+                if ($.inArray(s, picks.symbols) < 0) picks.symbols.push(s);
+                });
 
         // Set up all button
         var all = $('#null');
