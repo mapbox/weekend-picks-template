@@ -69,8 +69,8 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.75em;
   font-size: 1.5em;
   margin-bottom: 10px;
-  background: url(img/logo.png) 0px 1px no-repeat;
-  padding: 5px 0 5px 58px;
+  padding: 5px 0 5px 5px;
+  margin-left:55px;
 
 }
 h2 {
@@ -412,12 +412,6 @@ a.zoomer {
   border-radius: 5px;
   -moz-border-radius: 5px;
 
-  transition: opacity 200ms;
-  -moz-transition: opacity 200ms; /* Firefox 4 */
-  -webkit-transition: opacity 200ms; /* Safari and Chrome */
-  -o-transition: opacity 200ms; /* Opera */
-
-
   background:#000 no-repeat 50% 7px;
   overflow: hidden;
   display: block;
@@ -428,11 +422,11 @@ a.zoomer {
   font-weight: bold;
   font-size: 12px;
   color: white;
+  cursor: pointer;
 }
 
 .markerfilter:hover {
   opacity: .6;
-  cursor: pointer;
 }
 
 .selected {
@@ -455,3 +449,27 @@ strong { font-weight:bold; }
      height: 0;
      }
 .clearfix { display: inline-block; }
+
+/* touch tweaks */
+
+* {
+  /* prevent callout when holding tap on links (the native dialog that comes up) */
+  -webkit-touch-callout:none;
+
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  }
+
+@media only screen and (max-device-width: 480px) {
+  .map {
+      bottom:auto !important;
+      height:200px !important;
+    }
+  #content {
+    border-left:0 !important;
+    border-top:1px solid #ccc;
+    top:200px !important;
+    overflow-y:visible !important;
+    }
+
+  }

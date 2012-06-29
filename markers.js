@@ -42,7 +42,9 @@ picks.start = function(url) {
                 .attr('id', s)
                 .css('background-image', 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)');
 
-            el.click(function(a) {
+            el.bind('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
                 if (picks.selected == s) {
                     picks.selected = null;
                     $('#null').addClass('selected');
@@ -53,7 +55,6 @@ picks.start = function(url) {
                     picks.selected = s;
                 }
                 picks.show(picks.selected);
-                return false;
             });
 
             container.append(el);
