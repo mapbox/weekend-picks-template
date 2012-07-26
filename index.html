@@ -5,66 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title></title>
-    <link rel="stylesheet" href="map.css" type="text/css" />
+    <title>Weekend Picks</title>
+
+    <link rel="stylesheet" href="http://api.tiles.mapbox.com/mapbox.js/v0.6.2/mapbox.css" type="text/css" />
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <link rel="stylesheet" href="ext/mmg.css" type="text/css" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+    <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.2/mapbox.uncompressed.js'></script>
+    <script src="ext/jquery.min.js"></script>
+    <script src="ext/mapbox.jquery.js"></script>
+    <script src="ext/mapbox.jquery.geocoder.js"></script>
   </head>
+
   <body class="right">
     <div id="branding"></div>
-    <div id="content"><div class="limiter">
+    <div id="content">
+      <div class="limiter">
+
         <div id="about">
           <img style='float:left;' src='img/logo_retina.png' width='49' height'39' />
           <h1 class='map-title'></h1>
           <p class='description'></p>
           <div id="markerfilters" class="clearfix section">
-            <div class="markerfilter selected" id="null">All</div>
+            <a class="markerfilter selected" href="#all">All</a>
           </div>
         </div>
-        <div data-control='geocode' class="clearfix section" id="search">
+
+        <!-- geocoder -->
+        <div data-control='geocode' data-map="map" class="clearfix section" id="search">
           <form class="geocode">
             <input placeholder='Search for an address' type="text">
             <input type='submit' />
             <div id='geocode-error'></div>
           </form>
         </div>
-    </div></div>
+
+      </div>
+    </div>
     <div id="map" class="map"></div>
 
-    <!-- External libraries and site script -->
-    <script src="ext/jquery.min.js"></script>
-    <script src="ext/modestmaps.min.js"></script>
-    <script src="ext/wax/wax.mm.js"></script>
-    <script src="ext/wax/wax.ext.js"></script>
-    <script src="ext/easey.js"></script>
-    <script src="ext/mmg.js"></script>
-    <script src="ext/simplestyle_factory.js"></script>
-    <script src="ext/mmg_interaction.js"></script>
-    <script src="markers.js"></script>
     <script src="script.js"></script>
 
-    <!-- Site configuration -->
-    <script type="text/javascript">
-
-    // Make a new map in #map
-    var main = Map('map', {
-      api: 'http://a.tiles.mapbox.com/v3/examples.map-8j8lv902.jsonp',
-      zoomRange: [0, 15],
-      features: [
-        'zoomwheel',
-        'zoombox',
-        'zoompan',
-        'legend',
-        'share',
-        'layerHash'
-      ]
-    }, function(tilejson) {
-      document.title = tilejson.name;
-      $('h1.map-title').text(tilejson.name);
-      $('p.description').text(tilejson.description);
-    });
-
-    </script>
 </body>
 </html>
