@@ -1,8 +1,6 @@
 // Create and load map
 $('#map').mapbox('examples.map-8j8lv902', function(map, tilejson) {
 
-    tilejson = tilejson[0]; // Remove when upgrading to 0.6.3
-    
     map.setZoomRange(0, 15);
 
     // Set title and description from tilejson
