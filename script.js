@@ -3,6 +3,9 @@ $('#map').mapbox('examples.map-8j8lv902', function(map, tilejson) {
 
     map.setZoomRange(0, 15);
 
+    // Add share control
+    mapbox.share().map(map).add();
+
     // Set title and description from tilejson
     document.title = tilejson.name;
     $('h1.map-title').text(tilejson.name);
