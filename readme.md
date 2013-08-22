@@ -2,6 +2,8 @@
 
 This map site template displays a map with markers along with a filtering interface. You can download the template, swap out the default map with one of your own, and the template will automatically update based on your map's title, description and markers.
 
+![Screenshot](https://f.cloud.github.com/assets/83384/1010734/95aef392-0b4f-11e3-89f3-e6057ef94c42.jpg)
+
 To make your custom map, [sign up for MapBox](http://mapbox.com/plans/) and [create a map](http://mapbox.com/hosting/creating/). [Use the markers feature](http://www.mapbox.com/help/#adding-markers) to add and style your markers.
 
 Update this project to use the TileJSON URL of your new map (details below).
