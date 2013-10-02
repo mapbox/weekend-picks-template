@@ -147,7 +147,7 @@ form.geocode input[type=text] {
   line-height: 12px;
 }
 form.geocode input[type=submit] {
-  background:url(img/map.png) no-repeat -121px -0px #fff;
+  background:url(../img/map.png) no-repeat -121px -0px #fff;
   text-indent:-9999px;
   width:32px;
   height:32px;
@@ -242,7 +242,7 @@ a.zoomer {
 .mmg-default {
   width:20px;
   height:40px;
-  background:url(img/map.png) -120px -30px;
+  background:url(../img/map.png) -120px -30px;
   left:-10px;
   top:-30px;
 }
