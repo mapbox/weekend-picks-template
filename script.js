@@ -1,6 +1,8 @@
 // Create and load map
 $('#map').mapbox('https://a.tiles.mapbox.com/v3/examples.map-zr0njcqy.jsonp?secure', function(map, tilejson) {
 
+    mapbox.markers.marker_baseurl = 'https://a.tiles.mapbox.com/v3/marker/';
+
     map.setZoomRange(0, 15);
 
     // Add share control
