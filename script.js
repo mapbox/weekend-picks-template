@@ -1,5 +1,5 @@
 // Create and load map
-$('#map').mapbox('examples.map-zr0njcqy', function(map, tilejson) {
+$('#map').mapbox('https://a.tiles.mapbox.com/v3/examples.map-zr0njcqy.jsonp?secure', function(map, tilejson) {
 
     map.setZoomRange(0, 15);
 
@@ -21,7 +21,7 @@ $('#map').mapbox('examples.map-zr0njcqy', function(map, tilejson) {
         var el = $(document.createElement('a'))
             .addClass('markerfilter')
             .attr('href', '#' + s)
-            .css('background-image', 'url(http://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)')
+            .css('background-image', 'url(https://a.tiles.mapbox.com/v3/marker/pin-l-'+s+'+000000.png)')
             .bind('click', filter);
         container.append(el);
     });
